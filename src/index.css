@@ -35,7 +35,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -92,20 +92,43 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground bg-tech-pattern bg-tech-grid;
   }
 
   .chuv-header {
-    @apply bg-chuv text-white font-chuv;
+    @apply bg-gradient-to-r from-chuv to-chuv/80 text-white font-chuv shadow-md;
   }
 
   .synapsce-header {
-    @apply bg-synapsce text-white font-synapsce;
+    @apply bg-gradient-to-r from-synapsce to-synapsceGreen/80 text-white font-synapsce shadow-md;
   }
 
   .synapsce-card {
-    @apply border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow;
+    @apply border border-gray-200 rounded-xl p-4 hover:shadow-card-hover transition-all duration-300 bg-white/80 backdrop-blur-sm;
   }
+
+  .glass {
+    @apply bg-white/30 backdrop-blur-md border border-white/20 shadow-glass;
+  }
+}
+
+/* Modern card hover effect */
+.hover-card {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-tech;
+}
+
+/* Shiny button effect */
+.btn-shine {
+  @apply relative overflow-hidden;
+}
+
+.btn-shine::before {
+  @apply content-[''] absolute top-0 left-[-100%] w-full h-full bg-shimmer-gradient animate-shimmer;
+}
+
+/* Pulse animation for highlights */
+.pulse-highlight {
+  @apply animate-pulse-light;
 }
 
 .screen-transition-enter {
@@ -124,3 +147,4 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
