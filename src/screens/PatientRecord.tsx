@@ -44,7 +44,7 @@ const PatientRecord: React.FC<PatientRecordProps> = ({ patient, onViewRecommenda
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Patient Info */}
           <div className="lg:col-span-1">
-            <Card>
+            <Card className="hover-card">
               <CardHeader className="bg-chuv bg-opacity-10">
                 <CardTitle className="text-chuv">Informations Patient</CardTitle>
               </CardHeader>
@@ -83,7 +83,7 @@ const PatientRecord: React.FC<PatientRecordProps> = ({ patient, onViewRecommenda
 
           {/* Right Column - Treatments & Notes */}
           <div className="lg:col-span-2">
-            <Card className="mb-6">
+            <Card className="mb-6 hover-card">
               <CardHeader className="bg-chuv bg-opacity-10">
                 <CardTitle className="text-chuv">Traitements actuels (Conventionnels)</CardTitle>
               </CardHeader>
@@ -102,7 +102,7 @@ const PatientRecord: React.FC<PatientRecordProps> = ({ patient, onViewRecommenda
               </CardContent>
             </Card>
 
-            <Card className="mb-6">
+            <Card className="mb-6 hover-card">
               <CardHeader className="bg-chuv bg-opacity-10">
                 <CardTitle className="text-chuv">Tentatives thérapeutiques précédentes</CardTitle>
               </CardHeader>
@@ -115,7 +115,7 @@ const PatientRecord: React.FC<PatientRecordProps> = ({ patient, onViewRecommenda
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="hover-card">
               <CardHeader className="bg-chuv bg-opacity-10">
                 <CardTitle className="text-chuv">Note du médecin</CardTitle>
               </CardHeader>
@@ -125,7 +125,7 @@ const PatientRecord: React.FC<PatientRecordProps> = ({ patient, onViewRecommenda
                 </div>
                 <div className="mt-6 flex justify-end">
                   <Button 
-                    className="bg-synapsce hover:bg-synapsce/90 text-white"
+                    className="bg-synapsce hover:bg-synapsce/90 text-white btn-shine"
                     onClick={onViewRecommendations}
                   >
                     Voir les recommandations SYNAPSCE

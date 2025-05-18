@@ -51,7 +51,7 @@ Objectif thérapeutique actuel : Échec des traitements conventionnels. Recherch
           </p>
         </div>
 
-        <Card className="mb-6 shadow-md">
+        <Card className="mb-6 shadow-md hover-card">
           <CardContent className="pt-6">
             <div className="mb-4">
               <h2 className="text-lg font-semibold mb-2 text-synapsce">
@@ -66,7 +66,7 @@ Objectif thérapeutique actuel : Échec des traitements conventionnels. Recherch
           </CardContent>
         </Card>
 
-        <Card className="shadow-md">
+        <Card className="shadow-md hover-card">
           <CardContent className="pt-6">
             <div className="mb-6">
               <Label htmlFor="notes" className="text-lg font-semibold text-synapsce mb-4 block">
@@ -84,7 +84,7 @@ Objectif thérapeutique actuel : Échec des traitements conventionnels. Recherch
             <div className="flex justify-end">
               <Button
                 onClick={handleSubmit}
-                className="bg-synapsce hover:bg-synapsce/90 text-white px-6"
+                className="bg-gradient-to-r from-synapsce to-synapsceGreen/90 hover:opacity-90 transition-opacity text-white px-6 btn-shine"
                 size="lg"
               >
                 Rechercher dans SYNAPSCE

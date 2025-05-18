@@ -5,18 +5,31 @@ import PatientRecord from '@/screens/PatientRecord';
 import SynapsceSearch from '@/screens/SynapsceSearch';
 import SynapsceRecommendations from '@/screens/SynapsceRecommendations';
 import { useToast } from '@/components/ui/use-toast';
+import ConfirmDialog from '@/components/ConfirmDialog';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
-type Screen = 'patient-record' | 'synapsce-search' | 'synapsce-recommendations';
+type Screen = 'patient-record' | 'synapsce-search' | 'synapsce-recommendations' | 'loading';
 
 const Index = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('patient-record');
   const [additionalNotes, setAdditionalNotes] = useState<string>('');
+  const [showConfirmDialog, setShowConfirmDialog] = useState<boolean>(false);
   const { toast } = useToast();
   
   // We're using the first patient (fibromyalgia) for this demo
   const patient = synapsceData.patients[0];
   
   const handleViewRecommendations = () => {
+    // Check if we should show the confirmation dialog
+    const hideAlert = localStorage.getItem('hideAnonymizationAlert');
+    if (hideAlert === 'true') {
+      navigateToSynapsce();
+    } else {
+      setShowConfirmDialog(true);
+    }
+  };
+
+  const navigateToSynapsce = () => {
     setCurrentScreen('synapsce-search');
     toast({
       title: "Navigation vers SYNAPSCE",
@@ -26,11 +39,16 @@ const Index = () => {
   
   const handleSearchSubmit = (notes: string) => {
     setAdditionalNotes(notes);
-    setCurrentScreen('synapsce-recommendations');
-    toast({
-      title: "Recherche effectuée",
-      description: "Affichage des recommandations SYNAPSCE pertinentes...",
-    });
+    setCurrentScreen('loading');
+    
+    // Simulate loading time
+    setTimeout(() => {
+      setCurrentScreen('synapsce-recommendations');
+      toast({
+        title: "Recherche effectuée",
+        description: "Affichage des recommandations SYNAPSCE pertinentes...",
+      });
+    }, 2000); // Show loading for 2 seconds
   };
   
   const handleBack = () => {
@@ -52,6 +70,20 @@ const Index = () => {
           onSearchSubmit={handleSearchSubmit} 
         />
       )}
+
+      {currentScreen === 'loading' && (
+        <div className="min-h-screen bg-white font-synapsce flex flex-col items-center justify-center">
+          <div className="synapsce-header w-full p-4 mb-12 flex justify-center">
+            <h2 className="text-2xl font-bold">SYNAPSCE</h2>
+          </div>
+          <div className="p-8 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-xl border border-gray-100">
+            <LoadingSpinner size="lg" message="Analyse et recherche de recommandations en cours..." />
+            <p className="text-gray-500 text-sm mt-8 text-center max-w-md">
+              SYNAPSCE analyse les données anonymisées pour trouver les approches les plus pertinentes...
+            </p>
+          </div>
+        </div>
+      )}
       
       {currentScreen === 'synapsce-recommendations' && (
         <SynapsceRecommendations 
@@ -61,6 +93,16 @@ const Index = () => {
           onBack={handleBack}
         />
       )}
+
+      <ConfirmDialog
+        isOpen={showConfirmDialog}
+        onClose={() => setShowConfirmDialog(false)}
+        onConfirm={() => {
+          setShowConfirmDialog(false);
+          navigateToSynapsce();
+        }}
+        patientId={patient.anonymousDisplayId}
+      />
     </div>
   );
 };
