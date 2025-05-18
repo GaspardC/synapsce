@@ -1,30 +1,27 @@
 {
+  // "extends": "@repo/typescript-config/vite.json", // Likely incorrect path if not in a monorepo
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": false,
-
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    // Essential options for Vite + React + TS
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx", // Crucial for JSX processing
+    "module": "ESNext",
+    "moduleResolution": "bundler", // Or "node"; "bundler" is modern
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": false, // Keeping this false for now to match your root tsconfig and avoid too many new errors
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "noEmit": true, // Vite handles emitting files
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }
