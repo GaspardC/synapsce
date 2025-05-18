@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -139,12 +140,8 @@ export default {
           },
         },
         "gradient-x": {
-          "0%, 100%": {
-            backgroundPosition: "0% 50%",
-          },
-          "50%": {
-            backgroundPosition: "100% 50%",
-          },
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "200% 50%" },
         },
       },
       animation: {
@@ -154,7 +151,7 @@ export default {
         "slide-in": "slide-in 0.5s ease-out",
         "pulse-light": "pulse-light 2s ease-in-out infinite",
         shimmer: "shimmer 3s infinite linear",
-        "gradient-x": "gradient-x 3s ease-in-out infinite",
+        "gradient-x": "gradient-x 3s linear infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -170,5 +167,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
