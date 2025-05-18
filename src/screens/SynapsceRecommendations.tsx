@@ -39,6 +39,17 @@ const SynapsceRecommendations: React.FC<SynapsceRecommendationsProps> = ({
     approach.relevantForConditions.includes("cond_001")
   );
 
+  const getPractitionerAvatar = (firstName: string): string => {
+    const lowerFirstName = firstName.toLowerCase();
+    if (["hélène", "sophie", "amina", "julia"].includes(lowerFirstName)) {
+      return "/avatar-woman.png";
+    } else if (["david", "marc"].includes(lowerFirstName)) {
+      return "/avatar-man.png";
+    }
+    // Fallback, though all current practitioners are covered
+    return "/avatar-man.png";
+  };
+
   // Get custom pertinence texts for approaches
   const getPertinenceText = (approachId: string): string => {
     switch (approachId) {
@@ -331,8 +342,14 @@ const SynapsceRecommendations: React.FC<SynapsceRecommendationsProps> = ({
                     <Card key={practitioner.id} className="synapsce-card">
                       <CardHeader className="pb-2">
                         <div className="flex gap-3 items-start">
-                          <div className="bg-blue-100 p-2 rounded-full">
-                            <User className="h-5 w-5" />
+                          <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center overflow-hidden">
+                            <img
+                              src={getPractitionerAvatar(
+                                practitioner.firstName
+                              )}
+                              alt={`${practitioner.firstName} ${practitioner.lastName}`}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
                           <div>
                             <CardTitle className="text-base">
